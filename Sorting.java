@@ -59,9 +59,37 @@ public class Sorting
         }
         
     }
+    public void merge(int[] arr, int beg, int end, int mid) {
+        
+        int left = beg;
+        int right = mid + 1;
+        int[] arr2 = new int[end+1]
+        
+        while (left <= mid || right <= end) {
+            if (arr[left] < arr[right]) {
+                arr[beg] == arr[left]
+            }
+        }
+        
+    }
     
-    public void insertionSort(int[] arr) {
-        for (int i = 0; i < arr.length - 1; )
+    public void mergeSort(int[] arr) {
+        mergeSort(0, arr.length - 1, arr);
+    
+    }
+    
+    public void mergeSort(int beg, int end, int[] arr) {
+        if (beg == end) {
+            return;
+        } else {
+            int mid = (beg + end)/2;
+            mergeSort(beg, mid, arr);
+            mergeSort(mid + 1, end, arr);
+            merge(arr, beg, end, mid);
+            
+            
+        }
+        
     }
     
     public void testSorting() {
@@ -69,14 +97,14 @@ public class Sorting
         int[] arr2 = {1, 2, 3, 4, 5};
         int[] arr3 = {-4, 2, 0, 4, 1};
         int[] arr4 = {2, 2, 0, 4, 10};
-        selectionSort(arr1);
-        selectionSort(arr2);
-        selectionSort(arr3);
-        selectionSort(arr4);
+        mergeSort(arr1);
+        mergeSort(arr2);
+        mergeSort(arr3);
+        mergeSort(arr4);
         System.out.println(Arrays.toString(arr1));
         System.out.println(Arrays.toString(arr2));
         System.out.println(Arrays.toString(arr3));
-         System.out.println(Arrays.toString(arr4));
+        System.out.println(Arrays.toString(arr4));
     }
     
 }
