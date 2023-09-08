@@ -11,6 +11,8 @@ public class Sorting
 {
     // instance variables - replace the example below with your own
     private int x;
+    public static long mergeAssignments;
+    public static long mergeComparisons;
 
     /**
      * Constructor for objects of class Sorting
@@ -19,6 +21,8 @@ public class Sorting
     {
         // initialise instance variables
         x = 0;
+        mergeAssignments = 0;
+        mergeComparisons = 0;
     }
 
     /**
@@ -29,11 +33,11 @@ public class Sorting
      */
     public static void bubbleSort(int[] arr)
     {
-        int comparisons = 0;
-        int swaps = 0;
+        long comparisons = 0;
+        long swaps = 0;
         // put your code here
         for (int i = 0; i < arr.length - 1; i++) {
-            for (int j = 0; j < arr.length - 1; j++) {
+            for (int j = 0; j < arr.length - 1 - i; j++) {
                 
                 
                 if (arr[j] > arr[j+1]) {
@@ -46,13 +50,13 @@ public class Sorting
             }
             
         }
-        System.out.print(", " + swaps + ", " + comparisons);
+        System.out.print(", " + comparisons + ", " + swaps);
     }
     
     public static void selectionSort(int[] arr) {
 
-        int comparisons = 0;
-        int swaps = 0;
+        long comparisons = 0;
+        long swaps = 0;
         for(int i = 0; i < arr.length - 1; i++) {
             int minLocation = i;
             for (int j = i; j < arr.length - 1; j++) {
@@ -66,13 +70,13 @@ public class Sorting
             arr[minLocation] = temp;
             swaps++;
         }
-        System.out.print(", " + swaps + ", " + comparisons);
+        System.out.print(", " + comparisons + ", " + swaps);
         
     }
     
     public static void insertionSort(int[] arr) {
-        int comparisons = 0;
-        int swaps = 0;
+        long comparisons = 0;
+        long assignments = 0;
         for (int i = 1; i < arr.length; i++) {
             int temp = arr[i];
             int cur = i - 1;
@@ -80,13 +84,15 @@ public class Sorting
             while (cur > -1 && temp < arr[cur]) {
                 arr[cur+1] = arr[cur];
                 cur--;
+                assignments++;
                 comparisons++;
             }
-            comparisons++;
+
             arr[cur+1] = temp;
-            
+            assignments++;
+            comparisons++;
         }
-        System.out.print(", " + swaps + ", " + comparisons);
+        System.out.print(", " + comparisons + ", " + assignments/3);
     }
     
     public static void merge(int[] arr, int beg, int end, int mid) {
@@ -106,30 +112,40 @@ public class Sorting
                 right++;
                 i++;
             }
+            mergeComparisons++;
+            mergeAssignments++;
         }
         
         while (left <= mid) {
             arr2[i] = arr[left];
             left++;
             i++;
+            
+            mergeAssignments++;
         }
         
         while (right <= end) {
             arr2[i] = arr[right];
             right++;
             i++;
+            
+            mergeAssignments++;
         }
         
         for (int j = 0; j < arr2.length; j++) {
             arr[j+beg] = arr2[j];
+            mergeAssignments++;
             
         }
         
     }
     
     public static void mergeSort(int[] arr) {
+        mergeComparisons = 0;
+        mergeAssignments = 0;
         mergeSort(0, arr.length - 1, arr);
-    
+        System.out.print(", " + mergeComparisons + ", " + mergeAssignments/3);
+        
     }
     
     public static void mergeSort(int beg, int end, int[] arr) {
