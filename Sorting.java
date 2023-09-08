@@ -66,10 +66,13 @@ public class Sorting
             arr[minLocation] = temp;
             swaps++;
         }
+        System.out.print(", " + swaps + ", " + comparisons);
         
     }
     
     public static void insertionSort(int[] arr) {
+        int comparisons = 0;
+        int swaps = 0;
         for (int i = 1; i < arr.length; i++) {
             int temp = arr[i];
             int cur = i - 1;
@@ -77,7 +80,9 @@ public class Sorting
             while (cur > -1 && temp < arr[cur]) {
                 arr[cur+1] = arr[cur];
                 cur--;
+                comparisons++;
             }
+            comparisons++;
             arr[cur+1] = temp;
             
         }
