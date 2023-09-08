@@ -29,6 +29,8 @@ public class Sorting
      */
     public static void bubbleSort(int[] arr)
     {
+        int comparisons = 0;
+        int swaps = 0;
         // put your code here
         for (int i = 0; i < arr.length - 1; i++) {
             for (int j = 0; j < arr.length - 1; j++) {
@@ -38,24 +40,31 @@ public class Sorting
                     int temp = arr[j];
                     arr[j] = arr[j+1];
                     arr[j+1] = temp;
+                    swaps++;
                 }
+                comparisons++;
             }
             
         }
+        System.out.print(", " + swaps + ", " + comparisons);
     }
     
     public static void selectionSort(int[] arr) {
-        
+
+        int comparisons = 0;
+        int swaps = 0;
         for(int i = 0; i < arr.length - 1; i++) {
             int minLocation = i;
             for (int j = i; j < arr.length - 1; j++) {
                 if (arr[j] < arr[minLocation]) {
                     minLocation = j;
                 }
+                comparisons++;
             }
             int temp = arr[i];
             arr[i] = arr[minLocation];
             arr[minLocation] = temp;
+            swaps++;
         }
         
     }
@@ -72,6 +81,7 @@ public class Sorting
             arr[cur+1] = temp;
             
         }
+        System.out.print(", " + swaps + ", " + comparisons);
     }
     
     public static void merge(int[] arr, int beg, int end, int mid) {
